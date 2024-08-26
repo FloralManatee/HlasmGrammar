@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "ANTLR"
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Program Files\\ANTLR\\antlr-4.13.2-complete.jar",
+        "c:\\Program Files\\ANTLR\\antlr-runtime-4.13.2.jar"
+    ]
+}
