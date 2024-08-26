@@ -1,0 +1,3 @@
+Gen antlr files: antlr4 HLASM.g4
+Run grammar from input: antlr4-parse HLASM.g4 prog -gui
+    ctrl + z to submit input
