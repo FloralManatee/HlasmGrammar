@@ -9,60 +9,36 @@ prog
     ;
 
 line
-    : lbl? (instruction | directive) comment? EOL
-    | comment EOL
+    : label? WHITESPACE? (instruction | directive | macro) WHITESPACE? COMMENT? EOL
+    | COMMENT EOL
     ;
 
 instruction
-    : opcode WHITESPACE? register_','constant
-    | opcode WHITESPACE? register_','register_
-    ;
-
-opcode
-    : OPCODE
-    ;
-
-register_
-    : REGISTER
+    : OPCODE WHITESPACE? REGISTER','(REGISTER | label)
+    | OPCODE WHITESPACE? REGISTER','REGISTER
     ;
 
 directive
-    : assemblerdirective
+    : DIRECTIVE WHITESPACE? (STRING | INTEGER)?
     ;
 
-assemblerdirective
-    : ASSEMBLER_DIRECTIVE
-    ;
-
-lbl
-    : label
+macro
+    : MACRO (STRING | INTEGER)
     ;
 
 label
-    : name
+    : STRING
     ;
 
-constant
-    : name
-    ;
-
-name
-    : NAME
-    ;
-
-number
-    : NUMBER
-    ;
-
-comment
-    : COMMENT
-    ;
-
-ASSEMBLER_DIRECTIVE
+DIRECTIVE
     : 'USING'
     | 'CSECT'
     | 'LTORG'
+    | 'EQU'
+    | 'EQU *'
     | 'END'
+    | 'DS'
+    | 'DC'
     ;
 
 REGISTER
@@ -87,19 +63,23 @@ OPCODE
     : 'L'
     | 'LA'
     | 'A'
-    | 'EQU'
     ;
 
-NAME
-    : [A-Z] [A-Z0-9."]*
+MACRO
+    : 'IF'
+    | 'LOAD'
     ;
 
-NUMBER
+STRING
+    : [A-Z][A-Z0-9]*
+    ;
+
+INTEGER
     : [0-9]+
     ;
 
 COMMENT
-    : [*][A-Z ]*
+    : [*][*A-Z0-9 ]*
     ;
 
 EOL

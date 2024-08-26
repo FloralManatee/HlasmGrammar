@@ -1,4 +1,4 @@
-// Generated from HLASM.g4 by ANTLR 4.13.1
+// Generated from HLASM.g4 by ANTLR 4.13.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -52,30 +52,6 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOpcode(HLASMParser.OpcodeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitOpcode(HLASMParser.OpcodeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterRegister_(HLASMParser.Register_Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitRegister_(HLASMParser.Register_Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDirective(HLASMParser.DirectiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -88,25 +64,13 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssemblerdirective(HLASMParser.AssemblerdirectiveContext ctx) { }
+	@Override public void enterMacro(HLASMParser.MacroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssemblerdirective(HLASMParser.AssemblerdirectiveContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterLbl(HLASMParser.LblContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLbl(HLASMParser.LblContext ctx) { }
+	@Override public void exitMacro(HLASMParser.MacroContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -119,54 +83,6 @@ public class HLASMBaseListener implements HLASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLabel(HLASMParser.LabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterConstant(HLASMParser.ConstantContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitConstant(HLASMParser.ConstantContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterName(HLASMParser.NameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitName(HLASMParser.NameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterNumber(HLASMParser.NumberContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNumber(HLASMParser.NumberContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterComment(HLASMParser.CommentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitComment(HLASMParser.CommentContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

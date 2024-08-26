@@ -1,4 +1,4 @@
-// Generated from HLASM.g4 by ANTLR 4.13.1
+// Generated from HLASM.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,24 +8,22 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class HLASMParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, ASSEMBLER_DIRECTIVE=2, REGISTER=3, OPCODE=4, NAME=5, NUMBER=6, 
-		COMMENT=7, EOL=8, WHITESPACE=9;
+		T__0=1, DIRECTIVE=2, REGISTER=3, OPCODE=4, MACRO=5, STRING=6, INTEGER=7, 
+		COMMENT=8, EOL=9, WHITESPACE=10;
 	public static final int
-		RULE_prog = 0, RULE_line = 1, RULE_instruction = 2, RULE_opcode = 3, RULE_register_ = 4, 
-		RULE_directive = 5, RULE_assemblerdirective = 6, RULE_lbl = 7, RULE_label = 8, 
-		RULE_constant = 9, RULE_name = 10, RULE_number = 11, RULE_comment = 12;
+		RULE_prog = 0, RULE_line = 1, RULE_instruction = 2, RULE_directive = 3, 
+		RULE_macro = 4, RULE_label = 5;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"prog", "line", "instruction", "opcode", "register_", "directive", "assemblerdirective", 
-			"lbl", "label", "constant", "name", "number", "comment"
+			"prog", "line", "instruction", "directive", "macro", "label"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -38,7 +36,7 @@ public class HLASMParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, "ASSEMBLER_DIRECTIVE", "REGISTER", "OPCODE", "NAME", "NUMBER", 
+			null, null, "DIRECTIVE", "REGISTER", "OPCODE", "MACRO", "STRING", "INTEGER", 
 			"COMMENT", "EOL", "WHITESPACE"
 		};
 	}
@@ -123,21 +121,21 @@ public class HLASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(27); 
+			setState(13); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(26);
+				setState(12);
 				line();
 				}
 				}
-				setState(29); 
+				setState(15); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 180L) != 0) );
-			setState(31);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 1396L) != 0) );
+			setState(17);
 			match(EOF);
 			}
 		}
@@ -161,12 +159,17 @@ public class HLASMParser extends Parser {
 		public DirectiveContext directive() {
 			return getRuleContext(DirectiveContext.class,0);
 		}
-		public LblContext lbl() {
-			return getRuleContext(LblContext.class,0);
+		public MacroContext macro() {
+			return getRuleContext(MacroContext.class,0);
 		}
-		public CommentContext comment() {
-			return getRuleContext(CommentContext.class,0);
+		public LabelContext label() {
+			return getRuleContext(LabelContext.class,0);
 		}
+		public List<TerminalNode> WHITESPACE() { return getTokens(HLASMParser.WHITESPACE); }
+		public TerminalNode WHITESPACE(int i) {
+			return getToken(HLASMParser.WHITESPACE, i);
+		}
+		public TerminalNode COMMENT() { return getToken(HLASMParser.COMMENT, 0); }
 		public LineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -186,62 +189,90 @@ public class HLASMParser extends Parser {
 		enterRule(_localctx, 2, RULE_line);
 		int _la;
 		try {
-			setState(48);
+			setState(40);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case ASSEMBLER_DIRECTIVE:
+			case DIRECTIVE:
 			case OPCODE:
-			case NAME:
+			case MACRO:
+			case STRING:
+			case WHITESPACE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(34);
+				setState(20);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (_la==NAME) {
+				if (_la==STRING) {
 					{
-					setState(33);
-					lbl();
+					setState(19);
+					label();
 					}
 				}
 
-				setState(38);
+				setState(23);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==WHITESPACE) {
+					{
+					setState(22);
+					match(WHITESPACE);
+					}
+				}
+
+				setState(28);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case OPCODE:
 					{
-					setState(36);
+					setState(25);
 					instruction();
 					}
 					break;
-				case ASSEMBLER_DIRECTIVE:
+				case DIRECTIVE:
 					{
-					setState(37);
+					setState(26);
 					directive();
+					}
+					break;
+				case MACRO:
+					{
+					setState(27);
+					macro();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(41);
+				setState(31);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==WHITESPACE) {
+					{
+					setState(30);
+					match(WHITESPACE);
+					}
+				}
+
+				setState(34);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==COMMENT) {
 					{
-					setState(40);
-					comment();
+					setState(33);
+					match(COMMENT);
 					}
 				}
 
-				setState(43);
+				setState(36);
 				match(EOL);
 				}
 				break;
 			case COMMENT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(45);
-				comment();
-				setState(46);
+				setState(38);
+				match(COMMENT);
+				setState(39);
 				match(EOL);
 				}
 				break;
@@ -262,17 +293,13 @@ public class HLASMParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class InstructionContext extends ParserRuleContext {
-		public OpcodeContext opcode() {
-			return getRuleContext(OpcodeContext.class,0);
+		public TerminalNode OPCODE() { return getToken(HLASMParser.OPCODE, 0); }
+		public List<TerminalNode> REGISTER() { return getTokens(HLASMParser.REGISTER); }
+		public TerminalNode REGISTER(int i) {
+			return getToken(HLASMParser.REGISTER, i);
 		}
-		public List<Register_Context> register_() {
-			return getRuleContexts(Register_Context.class);
-		}
-		public Register_Context register_(int i) {
-			return getRuleContext(Register_Context.class,i);
-		}
-		public ConstantContext constant() {
-			return getRuleContext(ConstantContext.class,0);
+		public LabelContext label() {
+			return getRuleContext(LabelContext.class,0);
 		}
 		public TerminalNode WHITESPACE() { return getToken(HLASMParser.WHITESPACE, 0); }
 		public InstructionContext(ParserRuleContext parent, int invokingState) {
@@ -294,131 +321,71 @@ public class HLASMParser extends Parser {
 		enterRule(_localctx, 4, RULE_instruction);
 		int _la;
 		try {
-			setState(66);
+			setState(59);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(50);
-				opcode();
-				setState(52);
+				setState(42);
+				match(OPCODE);
+				setState(44);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==WHITESPACE) {
 					{
-					setState(51);
+					setState(43);
 					match(WHITESPACE);
 					}
 				}
 
-				setState(54);
-				register_();
-				setState(55);
+				setState(46);
+				match(REGISTER);
+				setState(47);
 				match(T__0);
-				setState(56);
-				constant();
+				setState(50);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case REGISTER:
+					{
+					setState(48);
+					match(REGISTER);
+					}
+					break;
+				case STRING:
+					{
+					setState(49);
+					label();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(58);
-				opcode();
-				setState(60);
+				setState(52);
+				match(OPCODE);
+				setState(54);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==WHITESPACE) {
 					{
-					setState(59);
+					setState(53);
 					match(WHITESPACE);
 					}
 				}
 
-				setState(62);
-				register_();
-				setState(63);
+				setState(56);
+				match(REGISTER);
+				setState(57);
 				match(T__0);
-				setState(64);
-				register_();
+				setState(58);
+				match(REGISTER);
 				}
 				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class OpcodeContext extends ParserRuleContext {
-		public TerminalNode OPCODE() { return getToken(HLASMParser.OPCODE, 0); }
-		public OpcodeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_opcode; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterOpcode(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitOpcode(this);
-		}
-	}
-
-	public final OpcodeContext opcode() throws RecognitionException {
-		OpcodeContext _localctx = new OpcodeContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_opcode);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(68);
-			match(OPCODE);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class Register_Context extends ParserRuleContext {
-		public TerminalNode REGISTER() { return getToken(HLASMParser.REGISTER, 0); }
-		public Register_Context(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_register_; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterRegister_(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitRegister_(this);
-		}
-	}
-
-	public final Register_Context register_() throws RecognitionException {
-		Register_Context _localctx = new Register_Context(_ctx, getState());
-		enterRule(_localctx, 8, RULE_register_);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(70);
-			match(REGISTER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -434,9 +401,10 @@ public class HLASMParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DirectiveContext extends ParserRuleContext {
-		public AssemblerdirectiveContext assemblerdirective() {
-			return getRuleContext(AssemblerdirectiveContext.class,0);
-		}
+		public TerminalNode DIRECTIVE() { return getToken(HLASMParser.DIRECTIVE, 0); }
+		public TerminalNode WHITESPACE() { return getToken(HLASMParser.WHITESPACE, 0); }
+		public TerminalNode STRING() { return getToken(HLASMParser.STRING, 0); }
+		public TerminalNode INTEGER() { return getToken(HLASMParser.INTEGER, 0); }
 		public DirectiveContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -453,12 +421,41 @@ public class HLASMParser extends Parser {
 
 	public final DirectiveContext directive() throws RecognitionException {
 		DirectiveContext _localctx = new DirectiveContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_directive);
+		enterRule(_localctx, 6, RULE_directive);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
-			assemblerdirective();
+			setState(61);
+			match(DIRECTIVE);
+			setState(63);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+			case 1:
+				{
+				setState(62);
+				match(WHITESPACE);
+				}
+				break;
+			}
+			setState(66);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==STRING || _la==INTEGER) {
+				{
+				setState(65);
+				_la = _input.LA(1);
+				if ( !(_la==STRING || _la==INTEGER) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -473,70 +470,43 @@ public class HLASMParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class AssemblerdirectiveContext extends ParserRuleContext {
-		public TerminalNode ASSEMBLER_DIRECTIVE() { return getToken(HLASMParser.ASSEMBLER_DIRECTIVE, 0); }
-		public AssemblerdirectiveContext(ParserRuleContext parent, int invokingState) {
+	public static class MacroContext extends ParserRuleContext {
+		public TerminalNode MACRO() { return getToken(HLASMParser.MACRO, 0); }
+		public TerminalNode STRING() { return getToken(HLASMParser.STRING, 0); }
+		public TerminalNode INTEGER() { return getToken(HLASMParser.INTEGER, 0); }
+		public MacroContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_assemblerdirective; }
+		@Override public int getRuleIndex() { return RULE_macro; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterAssemblerdirective(this);
+			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterMacro(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitAssemblerdirective(this);
+			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitMacro(this);
 		}
 	}
 
-	public final AssemblerdirectiveContext assemblerdirective() throws RecognitionException {
-		AssemblerdirectiveContext _localctx = new AssemblerdirectiveContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_assemblerdirective);
+	public final MacroContext macro() throws RecognitionException {
+		MacroContext _localctx = new MacroContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_macro);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
-			match(ASSEMBLER_DIRECTIVE);
+			setState(68);
+			match(MACRO);
+			setState(69);
+			_la = _input.LA(1);
+			if ( !(_la==STRING || _la==INTEGER) ) {
+			_errHandler.recoverInline(this);
 			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class LblContext extends ParserRuleContext {
-		public LabelContext label() {
-			return getRuleContext(LabelContext.class,0);
-		}
-		public LblContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_lbl; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterLbl(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitLbl(this);
-		}
-	}
-
-	public final LblContext lbl() throws RecognitionException {
-		LblContext _localctx = new LblContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_lbl);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(76);
-			label();
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -552,9 +522,7 @@ public class HLASMParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class LabelContext extends ParserRuleContext {
-		public NameContext name() {
-			return getRuleContext(NameContext.class,0);
-		}
+		public TerminalNode STRING() { return getToken(HLASMParser.STRING, 0); }
 		public LabelContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -571,166 +539,12 @@ public class HLASMParser extends Parser {
 
 	public final LabelContext label() throws RecognitionException {
 		LabelContext _localctx = new LabelContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_label);
+		enterRule(_localctx, 10, RULE_label);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
-			name();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ConstantContext extends ParserRuleContext {
-		public NameContext name() {
-			return getRuleContext(NameContext.class,0);
-		}
-		public ConstantContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_constant; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterConstant(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitConstant(this);
-		}
-	}
-
-	public final ConstantContext constant() throws RecognitionException {
-		ConstantContext _localctx = new ConstantContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_constant);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(80);
-			name();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class NameContext extends ParserRuleContext {
-		public TerminalNode NAME() { return getToken(HLASMParser.NAME, 0); }
-		public NameContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_name; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterName(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitName(this);
-		}
-	}
-
-	public final NameContext name() throws RecognitionException {
-		NameContext _localctx = new NameContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_name);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(82);
-			match(NAME);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class NumberContext extends ParserRuleContext {
-		public TerminalNode NUMBER() { return getToken(HLASMParser.NUMBER, 0); }
-		public NumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_number; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitNumber(this);
-		}
-	}
-
-	public final NumberContext number() throws RecognitionException {
-		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_number);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(84);
-			match(NUMBER);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class CommentContext extends ParserRuleContext {
-		public TerminalNode COMMENT() { return getToken(HLASMParser.COMMENT, 0); }
-		public CommentContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_comment; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).enterComment(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof HLASMListener ) ((HLASMListener)listener).exitComment(this);
-		}
-	}
-
-	public final CommentContext comment() throws RecognitionException {
-		CommentContext _localctx = new CommentContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_comment);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(86);
-			match(COMMENT);
+			setState(71);
+			match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -745,54 +559,53 @@ public class HLASMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\tY\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\nJ\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
-		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
-		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
-		"\f\u0007\f\u0001\u0000\u0004\u0000\u001c\b\u0000\u000b\u0000\f\u0000\u001d"+
-		"\u0001\u0000\u0001\u0000\u0001\u0001\u0003\u0001#\b\u0001\u0001\u0001"+
-		"\u0001\u0001\u0003\u0001\'\b\u0001\u0001\u0001\u0003\u0001*\b\u0001\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u00011\b"+
-		"\u0001\u0001\u0002\u0001\u0002\u0003\u00025\b\u0002\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002=\b"+
-		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002C\b"+
-		"\u0002\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
-		"\u0005\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\b\u0001\b"+
-		"\u0001\t\u0001\t\u0001\n\u0001\n\u0001\u000b\u0001\u000b\u0001\f\u0001"+
-		"\f\u0001\f\u0000\u0000\r\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012"+
-		"\u0014\u0016\u0018\u0000\u0000S\u0000\u001b\u0001\u0000\u0000\u0000\u0002"+
-		"0\u0001\u0000\u0000\u0000\u0004B\u0001\u0000\u0000\u0000\u0006D\u0001"+
-		"\u0000\u0000\u0000\bF\u0001\u0000\u0000\u0000\nH\u0001\u0000\u0000\u0000"+
-		"\fJ\u0001\u0000\u0000\u0000\u000eL\u0001\u0000\u0000\u0000\u0010N\u0001"+
-		"\u0000\u0000\u0000\u0012P\u0001\u0000\u0000\u0000\u0014R\u0001\u0000\u0000"+
-		"\u0000\u0016T\u0001\u0000\u0000\u0000\u0018V\u0001\u0000\u0000\u0000\u001a"+
-		"\u001c\u0003\u0002\u0001\u0000\u001b\u001a\u0001\u0000\u0000\u0000\u001c"+
-		"\u001d\u0001\u0000\u0000\u0000\u001d\u001b\u0001\u0000\u0000\u0000\u001d"+
-		"\u001e\u0001\u0000\u0000\u0000\u001e\u001f\u0001\u0000\u0000\u0000\u001f"+
-		" \u0005\u0000\u0000\u0001 \u0001\u0001\u0000\u0000\u0000!#\u0003\u000e"+
-		"\u0007\u0000\"!\u0001\u0000\u0000\u0000\"#\u0001\u0000\u0000\u0000#&\u0001"+
-		"\u0000\u0000\u0000$\'\u0003\u0004\u0002\u0000%\'\u0003\n\u0005\u0000&"+
-		"$\u0001\u0000\u0000\u0000&%\u0001\u0000\u0000\u0000\')\u0001\u0000\u0000"+
-		"\u0000(*\u0003\u0018\f\u0000)(\u0001\u0000\u0000\u0000)*\u0001\u0000\u0000"+
-		"\u0000*+\u0001\u0000\u0000\u0000+,\u0005\b\u0000\u0000,1\u0001\u0000\u0000"+
-		"\u0000-.\u0003\u0018\f\u0000./\u0005\b\u0000\u0000/1\u0001\u0000\u0000"+
-		"\u00000\"\u0001\u0000\u0000\u00000-\u0001\u0000\u0000\u00001\u0003\u0001"+
-		"\u0000\u0000\u000024\u0003\u0006\u0003\u000035\u0005\t\u0000\u000043\u0001"+
-		"\u0000\u0000\u000045\u0001\u0000\u0000\u000056\u0001\u0000\u0000\u0000"+
-		"67\u0003\b\u0004\u000078\u0005\u0001\u0000\u000089\u0003\u0012\t\u0000"+
-		"9C\u0001\u0000\u0000\u0000:<\u0003\u0006\u0003\u0000;=\u0005\t\u0000\u0000"+
-		"<;\u0001\u0000\u0000\u0000<=\u0001\u0000\u0000\u0000=>\u0001\u0000\u0000"+
-		"\u0000>?\u0003\b\u0004\u0000?@\u0005\u0001\u0000\u0000@A\u0003\b\u0004"+
-		"\u0000AC\u0001\u0000\u0000\u0000B2\u0001\u0000\u0000\u0000B:\u0001\u0000"+
-		"\u0000\u0000C\u0005\u0001\u0000\u0000\u0000DE\u0005\u0004\u0000\u0000"+
-		"E\u0007\u0001\u0000\u0000\u0000FG\u0005\u0003\u0000\u0000G\t\u0001\u0000"+
-		"\u0000\u0000HI\u0003\f\u0006\u0000I\u000b\u0001\u0000\u0000\u0000JK\u0005"+
-		"\u0002\u0000\u0000K\r\u0001\u0000\u0000\u0000LM\u0003\u0010\b\u0000M\u000f"+
-		"\u0001\u0000\u0000\u0000NO\u0003\u0014\n\u0000O\u0011\u0001\u0000\u0000"+
-		"\u0000PQ\u0003\u0014\n\u0000Q\u0013\u0001\u0000\u0000\u0000RS\u0005\u0005"+
-		"\u0000\u0000S\u0015\u0001\u0000\u0000\u0000TU\u0005\u0006\u0000\u0000"+
-		"U\u0017\u0001\u0000\u0000\u0000VW\u0005\u0007\u0000\u0000W\u0019\u0001"+
-		"\u0000\u0000\u0000\b\u001d\"&)04<B";
+		"\u0005\u0007\u0005\u0001\u0000\u0004\u0000\u000e\b\u0000\u000b\u0000\f"+
+		"\u0000\u000f\u0001\u0000\u0001\u0000\u0001\u0001\u0003\u0001\u0015\b\u0001"+
+		"\u0001\u0001\u0003\u0001\u0018\b\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0003\u0001\u001d\b\u0001\u0001\u0001\u0003\u0001 \b\u0001\u0001\u0001"+
+		"\u0003\u0001#\b\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0003\u0001)\b\u0001\u0001\u0002\u0001\u0002\u0003\u0002-\b\u0002\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u00023\b\u0002\u0001"+
+		"\u0002\u0001\u0002\u0003\u00027\b\u0002\u0001\u0002\u0001\u0002\u0001"+
+		"\u0002\u0003\u0002<\b\u0002\u0001\u0003\u0001\u0003\u0003\u0003@\b\u0003"+
+		"\u0001\u0003\u0003\u0003C\b\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0000\u0000\u0006\u0000\u0002\u0004"+
+		"\u0006\b\n\u0000\u0001\u0001\u0000\u0006\u0007Q\u0000\r\u0001\u0000\u0000"+
+		"\u0000\u0002(\u0001\u0000\u0000\u0000\u0004;\u0001\u0000\u0000\u0000\u0006"+
+		"=\u0001\u0000\u0000\u0000\bD\u0001\u0000\u0000\u0000\nG\u0001\u0000\u0000"+
+		"\u0000\f\u000e\u0003\u0002\u0001\u0000\r\f\u0001\u0000\u0000\u0000\u000e"+
+		"\u000f\u0001\u0000\u0000\u0000\u000f\r\u0001\u0000\u0000\u0000\u000f\u0010"+
+		"\u0001\u0000\u0000\u0000\u0010\u0011\u0001\u0000\u0000\u0000\u0011\u0012"+
+		"\u0005\u0000\u0000\u0001\u0012\u0001\u0001\u0000\u0000\u0000\u0013\u0015"+
+		"\u0003\n\u0005\u0000\u0014\u0013\u0001\u0000\u0000\u0000\u0014\u0015\u0001"+
+		"\u0000\u0000\u0000\u0015\u0017\u0001\u0000\u0000\u0000\u0016\u0018\u0005"+
+		"\n\u0000\u0000\u0017\u0016\u0001\u0000\u0000\u0000\u0017\u0018\u0001\u0000"+
+		"\u0000\u0000\u0018\u001c\u0001\u0000\u0000\u0000\u0019\u001d\u0003\u0004"+
+		"\u0002\u0000\u001a\u001d\u0003\u0006\u0003\u0000\u001b\u001d\u0003\b\u0004"+
+		"\u0000\u001c\u0019\u0001\u0000\u0000\u0000\u001c\u001a\u0001\u0000\u0000"+
+		"\u0000\u001c\u001b\u0001\u0000\u0000\u0000\u001d\u001f\u0001\u0000\u0000"+
+		"\u0000\u001e \u0005\n\u0000\u0000\u001f\u001e\u0001\u0000\u0000\u0000"+
+		"\u001f \u0001\u0000\u0000\u0000 \"\u0001\u0000\u0000\u0000!#\u0005\b\u0000"+
+		"\u0000\"!\u0001\u0000\u0000\u0000\"#\u0001\u0000\u0000\u0000#$\u0001\u0000"+
+		"\u0000\u0000$%\u0005\t\u0000\u0000%)\u0001\u0000\u0000\u0000&\'\u0005"+
+		"\b\u0000\u0000\')\u0005\t\u0000\u0000(\u0014\u0001\u0000\u0000\u0000("+
+		"&\u0001\u0000\u0000\u0000)\u0003\u0001\u0000\u0000\u0000*,\u0005\u0004"+
+		"\u0000\u0000+-\u0005\n\u0000\u0000,+\u0001\u0000\u0000\u0000,-\u0001\u0000"+
+		"\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0005\u0003\u0000\u0000/2\u0005"+
+		"\u0001\u0000\u000003\u0005\u0003\u0000\u000013\u0003\n\u0005\u000020\u0001"+
+		"\u0000\u0000\u000021\u0001\u0000\u0000\u00003<\u0001\u0000\u0000\u0000"+
+		"46\u0005\u0004\u0000\u000057\u0005\n\u0000\u000065\u0001\u0000\u0000\u0000"+
+		"67\u0001\u0000\u0000\u000078\u0001\u0000\u0000\u000089\u0005\u0003\u0000"+
+		"\u00009:\u0005\u0001\u0000\u0000:<\u0005\u0003\u0000\u0000;*\u0001\u0000"+
+		"\u0000\u0000;4\u0001\u0000\u0000\u0000<\u0005\u0001\u0000\u0000\u0000"+
+		"=?\u0005\u0002\u0000\u0000>@\u0005\n\u0000\u0000?>\u0001\u0000\u0000\u0000"+
+		"?@\u0001\u0000\u0000\u0000@B\u0001\u0000\u0000\u0000AC\u0007\u0000\u0000"+
+		"\u0000BA\u0001\u0000\u0000\u0000BC\u0001\u0000\u0000\u0000C\u0007\u0001"+
+		"\u0000\u0000\u0000DE\u0005\u0005\u0000\u0000EF\u0007\u0000\u0000\u0000"+
+		"F\t\u0001\u0000\u0000\u0000GH\u0005\u0006\u0000\u0000H\u000b\u0001\u0000"+
+		"\u0000\u0000\r\u000f\u0014\u0017\u001c\u001f\"(,26;?B";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
