@@ -27,49 +27,76 @@ whitespace
     ;
 
 instruction
-    : OPCODE WHITESPACE? REGISTER','(REGISTER | label)
-    | OPCODE WHITESPACE? REGISTER','REGISTER
+    : opcode whitespace? register','(register | label)
+    | opcode whitespace? register','register
+    ;
+
+opcode
+    : OPCODE
+    ;
+
+register
+    : REGISTER
     ;
 
 directive
-    : DIRECTIVE WHITESPACE? (STRING | INTEGER)?
+    : dircode whitespace? (curloc | STRING | INTEGER)?
+    ;
+
+curloc
+    : CURLOC
+    ;
+
+dircode
+    : DIRCODE
     ;
 
 macro
-    : MACRO (STRING | INTEGER)
+    : macode (STRING | INTEGER)
     ;
 
-comment:
+macode
+    : MACRO
+    ;
+
+comment
     : COMMENT
     ;
 
-DIRECTIVE
+DIRCODE
     : 'USING'
     | 'CSECT'
     | 'LTORG'
     | 'EQU'
-    | 'EQU *'
     | 'END'
     | 'DS'
     | 'DC'
     ;
 
-REGISTER
+CURLOC
+    : '*'  /** aster represents current loc.
+     when used it statements like EQU * it is a seperate token to the directive.
+     */
+    ;
+
+REGISTER /** registeres equated to prefix R popular stylistic programming choice,
+    Technically register names can be equated to any string but grammar will not cover that case.
+    */
     : '1' | 'R1'
-    | '2'
-    | '3'
-    | '4'
-    | '5'
-    | '6'
-    | '7'
-    | '8'
-    | '9'
-    | '10'
-    | '11'
-    | '12'
-    | '13'
-    | '14'
-    | '15'
+    | '2' | 'R2'
+    | '3' | 'R3'
+    | '4' | 'R4'
+    | '5' | 'R5'
+    | '6' | 'R6'
+    | '7' | 'R7'
+    | '8' | 'R8'
+    | '9' | 'R9'
+    | '10'| 'R10'
+    | '11'| 'R11'
+    | '12'| 'R12'
+    | '13'| 'R13'
+    | '14'| 'R14'
+    | '15'| 'R15'
     ;
 
 OPCODE
