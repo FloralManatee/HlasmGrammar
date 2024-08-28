@@ -1,5 +1,10 @@
 grammar HLASM;
 
+/**
+    Lexer UPPER
+    Parser lower
+*/
+
 options {
     caseInsensitive = true;
 }
@@ -9,8 +14,16 @@ prog
     ;
 
 line
-    : label? WHITESPACE? (instruction | directive | macro) WHITESPACE? COMMENT? EOL
-    | COMMENT EOL
+    : label? whitespace? (instruction | directive | macro) whitespace? comment? EOL
+    | comment EOL
+    ;
+
+label
+    : STRING
+    ;
+
+whitespace
+    : WHITESPACE
     ;
 
 instruction
@@ -26,8 +39,8 @@ macro
     : MACRO (STRING | INTEGER)
     ;
 
-label
-    : STRING
+comment:
+    : COMMENT
     ;
 
 DIRECTIVE

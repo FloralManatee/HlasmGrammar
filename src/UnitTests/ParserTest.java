@@ -1,35 +1,34 @@
 package UnitTests;
 import Antlr.HLASMLexer;
 import Antlr.HLASMParser;
-import org.antlr.runtime.BitSet;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATNConfigSet;
-import org.antlr.v4.runtime.dfa.DFA;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.Console;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class ParserTest {
+    public static final noErrorListener _noErrorListener = new noErrorListener();
+
     private HLASMParser createParseNoError(List<TestToken> tokens) {
         ListTokenSource token_source = new ListTokenSource(tokens);
         CommonTokenStream token_stream = new CommonTokenStream(token_source);
-        return new HLASMParser(token_stream);
+        HLASMParser parser = new HLASMParser(token_stream);
+        parser.addErrorListener(_noErrorListener);
+        return parser;
     }
 
     public static class TestToken implements Token {
 
         private final String _text;
-        private final int tcod;
+        private final int _tcode;
 
         // Constructor
         public TestToken(String text, int type) {
             this._text = text;
-            this.tcod = type;
+            this._tcode = type;
         }
 
         @Override
@@ -39,7 +38,7 @@ public class ParserTest {
 
         @Override
         public int getType() {
-            return tcod;
+            return _tcode;
         }
 
         @Override
@@ -90,8 +89,13 @@ public class ParserTest {
         TestToken token3 = new TestToken("1", HLASMLexer.REGISTER);
         TestToken token4 = new TestToken("*COMM", HLASMLexer.COMMENT);
         TestToken whitespace = new TestToken(" ", HLASMLexer.WHITESPACE);
+        TestToken EOL = new TestToken("", HLASMLexer.EOL);
 
-        HLASMParser parser = createParseNoError(Arrays.asList(token1, whitespace, token2));
+        List<TestToken> line = Arrays.asList(token1, whitespace, token2);
+
+        HLASMParser parser = createParseNoError(line);
+        System.out.println(parser.line());
         Assert.assertEquals("TAG",parser.label().getText());
+
     }
 }
