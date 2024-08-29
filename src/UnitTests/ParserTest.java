@@ -84,18 +84,39 @@ public class ParserTest {
 
     @Test
     public void testFunctionPlain() {
+        List<TestToken> line = getTestTokens();
+
+        HLASMParser parser = createParseNoError(line);
+        Assert.assertEquals("TAG",parser.label().getText());
+        Assert.assertEquals(" ",parser.whitespace().getText());
+        Assert.assertEquals("LA",parser.opcode().getText());
+        Assert.assertEquals(" ",parser.whitespace().getText());
+        Assert.assertEquals("1",parser.register().getText());
+        Assert.assertEquals("3",parser.register().getText());
+        Assert.assertEquals(" ",parser.whitespace().getText());
+        Assert.assertEquals("*COMM",parser.comment().getText());
+    }
+
+    private static List<TestToken> getTestTokens() {
         TestToken token1 = new TestToken("TAG", HLASMLexer.STRING);
         TestToken token2 = new TestToken("LA", HLASMLexer.OPCODE);
         TestToken token3 = new TestToken("1", HLASMLexer.REGISTER);
-        TestToken token4 = new TestToken("*COMM", HLASMLexer.COMMENT);
+
+        // TestToken comma = new TestToken(",", HLASMLexer.STRING);
+
+        TestToken token4 = new TestToken("3", HLASMLexer.REGISTER);
+        TestToken token5 = new TestToken("*COMM", HLASMLexer.COMMENT);
+
         TestToken whitespace = new TestToken(" ", HLASMLexer.WHITESPACE);
-        TestToken EOL = new TestToken("", HLASMLexer.EOL);
 
-        List<TestToken> line = Arrays.asList(token1, whitespace, token2);
-
-        HLASMParser parser = createParseNoError(line);
-        System.out.println(parser.line());
-        Assert.assertEquals("TAG",parser.label().getText());
-
+        return Arrays.asList(token1,
+                whitespace,
+                token2,
+                whitespace,
+                token3,
+                // comma
+                token4,
+                whitespace,
+                token5);
     }
 }

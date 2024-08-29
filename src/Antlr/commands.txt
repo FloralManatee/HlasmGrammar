@@ -1,3 +1,4 @@
 Gen antlr files: antlr4 HLASM.g4
+Add 'package Antlr;' to classes and interfaces after build
 Run grammar from input: antlr4-parse HLASM.g4 prog -gui
     ctrl + z to submit input

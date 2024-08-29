@@ -56,7 +56,7 @@ macro
     ;
 
 macode
-    : MACRO
+    : MACODE
     ;
 
 comment
@@ -105,7 +105,7 @@ OPCODE
     | 'A'
     ;
 
-MACRO
+MACODE
     : 'IF'
     | 'LOAD'
     ;
