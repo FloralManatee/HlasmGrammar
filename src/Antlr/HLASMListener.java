@@ -1,5 +1,5 @@
+package Antlr; 
 // Generated from HLASM.g4 by ANTLR 4.13.2
-package Antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -87,6 +87,16 @@ public interface HLASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDirective(HLASMParser.DirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#relative}.
+	 * @param ctx the parse tree
+	 */
+	void enterRelative(HLASMParser.RelativeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#relative}.
+	 * @param ctx the parse tree
+	 */
+	void exitRelative(HLASMParser.RelativeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HLASMParser#curloc}.
 	 * @param ctx the parse tree

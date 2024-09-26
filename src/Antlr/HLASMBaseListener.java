@@ -1,5 +1,6 @@
+package Antlr; 
 // Generated from HLASM.g4 by ANTLR 4.13.2
-package Antlr;
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -107,6 +108,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDirective(HLASMParser.DirectiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRelative(HLASMParser.RelativeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRelative(HLASMParser.RelativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

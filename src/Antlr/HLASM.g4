@@ -14,8 +14,8 @@ prog
     ;
 
 line
-    : label? whitespace? (instruction | directive | macro) whitespace? comment? EOL
-    | comment EOL
+    : label? whitespace*? (instruction | directive | macro) whitespace*? comment? EOL /* ExecLine */
+    | comment EOL /* CommLine */
     ;
 
 label
@@ -27,8 +27,8 @@ whitespace
     ;
 
 instruction
-    : opcode whitespace? register','(register | label)
-    | opcode whitespace? register','register
+    : opcode whitespace*? register','(register | label | relative | curloc)
+    | opcode whitespace*? register','register
     ;
 
 opcode
@@ -40,7 +40,11 @@ register
     ;
 
 directive
-    : dircode whitespace? (curloc | STRING | INTEGER)?
+    : dircode whitespace? (curloc | STRING | INTEGER | relative | register | label) ','? (curloc | STRING | INTEGER | relative | register | label)?
+    ;
+
+relative
+    : RELATIVE
     ;
 
 curloc
@@ -78,6 +82,10 @@ CURLOC
     : '*'  /** aster represents current loc.
      when used it statements like EQU * it is a seperate token to the directive.
      */
+    ;
+
+RELATIVE
+    : '+'INTEGER /** rative addresses can be used, e.g., +4 */
     ;
 
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
@@ -213,7 +221,7 @@ MACODE
     ;
 
 STRING
-    : [A-Z][A-Z0-9]*
+    : [A-Z][A-Z0-9@]*
     ;
 
 INTEGER
@@ -221,7 +229,7 @@ INTEGER
     ;
 
 COMMENT
-    : [*][*A-Z0-9 ]*
+    : [*][*A-Za-z0-9 .\-():/,@$#!_%`~"~'=]*
     ;
 
 EOL
