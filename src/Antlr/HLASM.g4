@@ -14,8 +14,7 @@ prog
     ;
 
 line
-    : label? whitespace*? (instruction | directive | macro) whitespace*? comment? EOL /* ExecLine */
-    | comment EOL /* CommLine */
+    : label? whitespace*? (instruction | directive | macro)? whitespace*? comment? EOL /* ExecLine */
     ;
 
 label
@@ -229,13 +228,13 @@ INTEGER
     ;
 
 COMMENT
-    : [*][*A-Za-z0-9 .\-():/,@$#!_%`~"~'=]*
+    : [*][*A-Z0-9 .\-():/,@$#!_%`"'=]*
     ;
 
 EOL
     : [\r\n]+
     ;
 
-WHITESPACE          
-    : (' ' | '\t')
+WHITESPACE
+    : [ \t] -> channel(HIDDEN)
     ;
