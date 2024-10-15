@@ -1,5 +1,5 @@
-package Antlr; 
 // Generated from HLASM.g4 by ANTLR 4.13.2
+package Antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
