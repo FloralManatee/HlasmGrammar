@@ -77,6 +77,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterComma(HLASMParser.CommaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComma(HLASMParser.CommaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOpcode(HLASMParser.OpcodeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -108,6 +120,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDirective(HLASMParser.DirectiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterArgument(HLASMParser.ArgumentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitArgument(HLASMParser.ArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -156,6 +180,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMacro(HLASMParser.MacroContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(HLASMParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(HLASMParser.StringContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

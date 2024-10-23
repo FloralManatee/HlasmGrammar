@@ -1,4 +1,4 @@
-grammar HLASM;
+grammar HLASM_old;
 
 /**
     Lexer UPPER
@@ -14,7 +14,7 @@ prog
     ;
 
 line
-    : label? whitespace+? (instruction | directive | macro)? whitespace+? comment? EOL /* ExecLine */
+    : label? whitespace*? (instruction | directive | macro)? whitespace*? comment? EOL /* ExecLine */
     ;
 
 label
@@ -26,13 +26,8 @@ whitespace
     ;
 
 instruction
-    : opcode whitespace+? location','location
-    ;
-
-location
-    : register relative?
-    | label relative?
-    | curloc relative?
+    : opcode whitespace*? register','(register | label | relative | curloc)
+    | opcode whitespace*? register','register
     ;
 
 opcode
@@ -44,13 +39,7 @@ register
     ;
 
 directive
-    : dircode whitespace+? argument','?argument?
-    ;
-
-argument
-    : curloc relative?
-    | register relative?
-    | label relative?
+    : dircode whitespace? (curloc | STRING | INTEGER | relative | register | label) ','? (curloc | STRING | INTEGER | relative | register | label)?
     ;
 
 relative
@@ -66,7 +55,7 @@ dircode
     ;
 
 macro
-    : macode (STRING | INTEGER)?
+    : macode (STRING | INTEGER)
     ;
 
 macode
@@ -95,7 +84,7 @@ CURLOC
     ;
 
 RELATIVE
-    : '+'INTEGER /** relative addresses can be used, e.g., +4 */
+    : '+'INTEGER /** rative addresses can be used, e.g., +4 */
     ;
 
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
@@ -247,5 +236,5 @@ EOL
     ;
 
 WHITESPACE
-    : [ \t]
+    : [ \t] -> channel(HIDDEN)
     ;

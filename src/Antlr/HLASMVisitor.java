@@ -41,6 +41,12 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInstruction(HLASMParser.InstructionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HLASMParser#comma}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComma(HLASMParser.CommaContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HLASMParser#opcode}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -58,6 +64,12 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDirective(HLASMParser.DirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#argument}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgument(HLASMParser.ArgumentContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#relative}.
 	 * @param ctx the parse tree
@@ -82,6 +94,12 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitMacro(HLASMParser.MacroContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#string}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitString(HLASMParser.StringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#macode}.
 	 * @param ctx the parse tree

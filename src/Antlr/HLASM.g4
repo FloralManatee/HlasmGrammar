@@ -10,11 +10,15 @@ options {
 }
 
 prog
-    : line+ EOF
+    : (line EOL)+ EOF
     ;
 
 line
-    : label? whitespace*? (instruction | directive | macro)? whitespace*? comment? EOL /* ExecLine */
+    : (instruction | directive | macro) /* testing purposes */
+    | label? whitespace+ (instruction | directive | macro)
+    | label? whitespace+ (instruction | directive | macro) whitespace+ comment
+    | label? whitespace+ comment
+    | comment
     ;
 
 label
@@ -26,8 +30,11 @@ whitespace
     ;
 
 instruction
-    : opcode whitespace*? register','(register | label | relative | curloc)
-    | opcode whitespace*? register','register
+    : opcode whitespace+ argument comma argument
+    ;
+
+comma
+    : COMMA
     ;
 
 opcode
@@ -39,7 +46,14 @@ register
     ;
 
 directive
-    : dircode whitespace? (curloc | STRING | INTEGER | relative | register | label) ','? (curloc | STRING | INTEGER | relative | register | label)?
+    : dircode whitespace+ argument
+    | dircode whitespace+ argument comma argument
+    ;
+
+argument
+    : curloc relative?
+    | register relative?
+    | label relative?
     ;
 
 relative
@@ -55,7 +69,12 @@ dircode
     ;
 
 macro
-    : macode (STRING | INTEGER)
+    : macode
+    | macode whitespace+ (string | label)
+    ;
+
+string
+    : QUOTE STRING QUOTE
     ;
 
 macode
@@ -84,7 +103,7 @@ CURLOC
     ;
 
 RELATIVE
-    : '+'INTEGER /** rative addresses can be used, e.g., +4 */
+    : '+'INTEGER /** relative addresses can be used, e.g., +4 */
     ;
 
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
@@ -223,6 +242,10 @@ STRING
     : [A-Z][A-Z0-9@]*
     ;
 
+QUOTE
+    : ["']
+    ;
+
 INTEGER
     : [0-9]+
     ;
@@ -235,6 +258,10 @@ EOL
     : [\r\n]+
     ;
 
+COMMA
+    : [,]
+    ;
+
 WHITESPACE
-    : [ \t] -> channel(HIDDEN)
+    : [ \t]
     ;
