@@ -28,6 +28,46 @@ public interface HLASMListener extends ParseTreeListener {
 	 */
 	void exitLine(HLASMParser.LineContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link HLASMParser#instruction}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstruction(HLASMParser.InstructionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#instruction}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstruction(HLASMParser.InstructionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#directive}.
+	 * @param ctx the parse tree
+	 */
+	void enterDirective(HLASMParser.DirectiveContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#directive}.
+	 * @param ctx the parse tree
+	 */
+	void exitDirective(HLASMParser.DirectiveContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgument(HLASMParser.ArgumentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgument(HLASMParser.ArgumentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#macro}.
+	 * @param ctx the parse tree
+	 */
+	void enterMacro(HLASMParser.MacroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#macro}.
+	 * @param ctx the parse tree
+	 */
+	void exitMacro(HLASMParser.MacroContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link HLASMParser#label}.
 	 * @param ctx the parse tree
 	 */
@@ -47,16 +87,6 @@ public interface HLASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhitespace(HLASMParser.WhitespaceContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HLASMParser#instruction}.
-	 * @param ctx the parse tree
-	 */
-	void enterInstruction(HLASMParser.InstructionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HLASMParser#instruction}.
-	 * @param ctx the parse tree
-	 */
-	void exitInstruction(HLASMParser.InstructionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HLASMParser#comma}.
 	 * @param ctx the parse tree
@@ -88,26 +118,6 @@ public interface HLASMListener extends ParseTreeListener {
 	 */
 	void exitRegister(HLASMParser.RegisterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HLASMParser#directive}.
-	 * @param ctx the parse tree
-	 */
-	void enterDirective(HLASMParser.DirectiveContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HLASMParser#directive}.
-	 * @param ctx the parse tree
-	 */
-	void exitDirective(HLASMParser.DirectiveContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HLASMParser#argument}.
-	 * @param ctx the parse tree
-	 */
-	void enterArgument(HLASMParser.ArgumentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HLASMParser#argument}.
-	 * @param ctx the parse tree
-	 */
-	void exitArgument(HLASMParser.ArgumentContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link HLASMParser#relative}.
 	 * @param ctx the parse tree
 	 */
@@ -137,16 +147,6 @@ public interface HLASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDircode(HLASMParser.DircodeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link HLASMParser#macro}.
-	 * @param ctx the parse tree
-	 */
-	void enterMacro(HLASMParser.MacroContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link HLASMParser#macro}.
-	 * @param ctx the parse tree
-	 */
-	void exitMacro(HLASMParser.MacroContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HLASMParser#string}.
 	 * @param ctx the parse tree

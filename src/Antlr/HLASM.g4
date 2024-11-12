@@ -15,10 +15,32 @@ prog
 
 line
     : (instruction | directive | macro) /* testing purposes */
-    | label? whitespace+ (instruction | directive | macro)
     | label? whitespace+ (instruction | directive | macro) whitespace+ comment
-    | label? whitespace+ comment
+    | label? whitespace+ (instruction | directive | macro) whitespace+
+    | label? whitespace+ (instruction | directive | macro)
     | comment
+    ;
+
+instruction
+    : opcode whitespace+ argument comma argument
+    | opcode whitespace+ argument
+    ;
+
+directive
+    : dircode whitespace+ argument comma argument
+    | dircode whitespace+ argument
+    | dircode
+    ;
+
+argument
+    : curloc relative?
+    | register relative?
+    | label relative?
+    ;
+
+macro
+    : macode whitespace+ (string | label)
+    | macode
     ;
 
 label
@@ -27,10 +49,6 @@ label
 
 whitespace
     : WHITESPACE
-    ;
-
-instruction
-    : opcode whitespace+ argument comma argument
     ;
 
 comma
@@ -45,17 +63,6 @@ register
     : REGISTER
     ;
 
-directive
-    : dircode whitespace+ argument
-    | dircode whitespace+ argument comma argument
-    ;
-
-argument
-    : curloc relative?
-    | register relative?
-    | label relative?
-    ;
-
 relative
     : RELATIVE
     ;
@@ -68,11 +75,6 @@ dircode
     : DIRCODE
     ;
 
-macro
-    : macode
-    | macode whitespace+ (string | label)
-    ;
-
 string
     : QUOTE STRING QUOTE
     ;
@@ -82,7 +84,10 @@ macode
     ;
 
 comment
-    : COMMENT
+    : LONGCOM
+    | '*'(WHITESPACE STRING)+
+    | '*'(STRING WHITESPACE)+
+    | '*'~EOL*
     ;
 
 DIRCODE
@@ -239,19 +244,23 @@ MACODE
     ;
 
 STRING
-    : [A-Z][A-Z0-9@]*
+    : [A-Z0-9@.\-():/,$#!_%`"'=]+
+    ;
+
+LABEL
+    : [A-Z][A-Z0-9@#$]+
     ;
 
 QUOTE
     : ["']
     ;
 
-INTEGER
-    : [0-9]+
+LONGCOM
+    : [*][*]+
     ;
 
-COMMENT
-    : [*][*A-Z0-9 .\-():/,@$#!_%`"'=]*
+INTEGER
+    : [0-9]+
     ;
 
 EOL

@@ -28,4 +28,6 @@ public class LexerTest {
         List<Token> tokens = getTokensFromText("LA 3,2");
         Assert.assertEquals(6, tokens.size());
     }
+
+
 }

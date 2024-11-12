@@ -23,6 +23,30 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLine(HLASMParser.LineContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HLASMParser#instruction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstruction(HLASMParser.InstructionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#directive}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDirective(HLASMParser.DirectiveContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#argument}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArgument(HLASMParser.ArgumentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#macro}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMacro(HLASMParser.MacroContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HLASMParser#label}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -34,12 +58,6 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhitespace(HLASMParser.WhitespaceContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#instruction}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInstruction(HLASMParser.InstructionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#comma}.
 	 * @param ctx the parse tree
@@ -59,18 +77,6 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRegister(HLASMParser.RegisterContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HLASMParser#directive}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDirective(HLASMParser.DirectiveContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#argument}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArgument(HLASMParser.ArgumentContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link HLASMParser#relative}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -88,12 +94,6 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDircode(HLASMParser.DircodeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#macro}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMacro(HLASMParser.MacroContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#string}.
 	 * @param ctx the parse tree
