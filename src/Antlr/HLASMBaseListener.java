@@ -197,13 +197,13 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBracketreg(HLASMParser.BracketregContext ctx) { }
+	@Override public void enterBracketarg(HLASMParser.BracketargContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBracketreg(HLASMParser.BracketregContext ctx) { }
+	@Override public void exitBracketarg(HLASMParser.BracketargContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

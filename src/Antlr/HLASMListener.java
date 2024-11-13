@@ -158,15 +158,15 @@ public interface HLASMListener extends ParseTreeListener {
 	 */
 	void exitDircode(HLASMParser.DircodeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HLASMParser#bracketreg}.
+	 * Enter a parse tree produced by {@link HLASMParser#bracketarg}.
 	 * @param ctx the parse tree
 	 */
-	void enterBracketreg(HLASMParser.BracketregContext ctx);
+	void enterBracketarg(HLASMParser.BracketargContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HLASMParser#bracketreg}.
+	 * Exit a parse tree produced by {@link HLASMParser#bracketarg}.
 	 * @param ctx the parse tree
 	 */
-	void exitBracketreg(HLASMParser.BracketregContext ctx);
+	void exitBracketarg(HLASMParser.BracketargContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HLASMParser#literal}.
 	 * @param ctx the parse tree

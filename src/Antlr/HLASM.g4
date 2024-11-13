@@ -15,26 +15,30 @@ prog
 
 line
     : (instruction | directive | macro) /* testing purposes */
-    | label? whitespace+ (instruction | directive | macro) whitespace+ comment
-    | label? whitespace+ (instruction | directive | macro) whitespace+ comment_
-    | label? whitespace+ (instruction | directive | macro) whitespace+
-    | label? whitespace+ (instruction | directive | macro)
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment_
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+
+    | (label | register)? whitespace+ (instruction | directive | macro)
     | comment
     ;
 
 instruction
     : opcode whitespace+ argument comma? argument? comma? argument?
+    | opcode whitespace+ argument comma argument argument
     | sect
     ;
 
 directive
     : dircode whitespace+ argument comma? argument? comma? argument?
+    | dircode whitespace+ argument comma argument argument
+    | dircode
     ;
 
 argument
-    : curloc (relative | bracketreg)?
-    | register (relative | bracketreg)?
-    | label (relative | bracketreg)?
+    : curloc (relative | bracketarg)?
+    | register (relative | bracketarg)?
+    | label (relative | bracketarg)?
+    | bracketarg
     | literal
     ;
 
@@ -79,8 +83,9 @@ dircode
     : DIRCODE
     ;
 
-bracketreg
+bracketarg
     : BRACKETREG
+    | BRACKETLEN
     ;
 
 literal
@@ -102,13 +107,18 @@ comment_
 
 LITERAL
     : '=X' QUOTE (STRING | INTEGER)+ QUOTE
-    | 'C' QUOTE STRING QUOTE
-    | 'XL' INTEGER QUOTE (STRING | INTEGER)+ QUOTE
-    | 'CL' INTEGER QUOTE (STRING | COMMSTRING)+ QUOTE
+    | ('X' | 'H') QUOTE (STRING | INTEGER)+ QUOTE
+    | 'C' QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
+    | INTEGER? 'XL' INTEGER+ QUOTE (STRING | INTEGER)+ QUOTE
+    | INTEGER? 'CL' INTEGER+ QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
     ;
 
 BRACKETREG
-    : '(' REGISTER ')'
+    : '(' COMMA? REGISTER ')'
+    ;
+
+BRACKETLEN
+    : '(' INTEGER+ ')'
     ;
 
 DIRCODE
@@ -215,6 +225,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'MH'
     | 'MVC'
     | 'MR'
+    | 'MP'
     | 'MVCIN'
     | 'MVCL'
     | 'MVI'
@@ -271,11 +282,11 @@ MACODE
     ;
 
 STRING
-    : [A-Z0-9@$#]+ /** chars allowed in labels */
+    : [A-Z0-9@$#&]+ /** chars allowed in labels */
     ;
 
 COMMSTRING
-    : [.\-():/!_%`"'=>]+ /** chars not allowed in labels but allowed in comments */
+    : [.\-():/!_%`"'=><+?]+ /** chars not allowed in labels but allowed in comments */
     ;
 
 QUOTE

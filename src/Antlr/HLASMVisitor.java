@@ -101,11 +101,11 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDircode(HLASMParser.DircodeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HLASMParser#bracketreg}.
+	 * Visit a parse tree produced by {@link HLASMParser#bracketarg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBracketreg(HLASMParser.BracketregContext ctx);
+	T visitBracketarg(HLASMParser.BracketargContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#literal}.
 	 * @param ctx the parse tree

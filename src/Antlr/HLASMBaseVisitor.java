@@ -123,7 +123,7 @@ public class HLASMBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBracketreg(HLASMParser.BracketregContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBracketarg(HLASMParser.BracketargContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
