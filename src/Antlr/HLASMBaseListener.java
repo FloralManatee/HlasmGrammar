@@ -161,6 +161,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSect(HLASMParser.SectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSect(HLASMParser.SectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCurloc(HLASMParser.CurlocContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -185,13 +197,25 @@ public class HLASMBaseListener implements HLASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterString(HLASMParser.StringContext ctx) { }
+	@Override public void enterBracketreg(HLASMParser.BracketregContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitString(HLASMParser.StringContext ctx) { }
+	@Override public void exitBracketreg(HLASMParser.BracketregContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteral(HLASMParser.LiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteral(HLASMParser.LiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -216,6 +240,18 @@ public class HLASMBaseListener implements HLASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitComment(HLASMParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComment_(HLASMParser.Comment_Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComment_(HLASMParser.Comment_Context ctx) { }
 
 	/**
 	 * {@inheritDoc}

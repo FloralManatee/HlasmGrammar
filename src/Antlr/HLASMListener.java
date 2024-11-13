@@ -128,6 +128,16 @@ public interface HLASMListener extends ParseTreeListener {
 	 */
 	void exitRelative(HLASMParser.RelativeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link HLASMParser#sect}.
+	 * @param ctx the parse tree
+	 */
+	void enterSect(HLASMParser.SectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#sect}.
+	 * @param ctx the parse tree
+	 */
+	void exitSect(HLASMParser.SectContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link HLASMParser#curloc}.
 	 * @param ctx the parse tree
 	 */
@@ -148,15 +158,25 @@ public interface HLASMListener extends ParseTreeListener {
 	 */
 	void exitDircode(HLASMParser.DircodeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link HLASMParser#string}.
+	 * Enter a parse tree produced by {@link HLASMParser#bracketreg}.
 	 * @param ctx the parse tree
 	 */
-	void enterString(HLASMParser.StringContext ctx);
+	void enterBracketreg(HLASMParser.BracketregContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link HLASMParser#string}.
+	 * Exit a parse tree produced by {@link HLASMParser#bracketreg}.
 	 * @param ctx the parse tree
 	 */
-	void exitString(HLASMParser.StringContext ctx);
+	void exitBracketreg(HLASMParser.BracketregContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void enterLiteral(HLASMParser.LiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#literal}.
+	 * @param ctx the parse tree
+	 */
+	void exitLiteral(HLASMParser.LiteralContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link HLASMParser#macode}.
 	 * @param ctx the parse tree
@@ -177,4 +197,14 @@ public interface HLASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComment(HLASMParser.CommentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link HLASMParser#comment_}.
+	 * @param ctx the parse tree
+	 */
+	void enterComment_(HLASMParser.Comment_Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link HLASMParser#comment_}.
+	 * @param ctx the parse tree
+	 */
+	void exitComment_(HLASMParser.Comment_Context ctx);
 }

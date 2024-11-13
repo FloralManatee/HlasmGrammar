@@ -83,6 +83,12 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRelative(HLASMParser.RelativeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HLASMParser#sect}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSect(HLASMParser.SectContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HLASMParser#curloc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -95,11 +101,17 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDircode(HLASMParser.DircodeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HLASMParser#string}.
+	 * Visit a parse tree produced by {@link HLASMParser#bracketreg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitString(HLASMParser.StringContext ctx);
+	T visitBracketreg(HLASMParser.BracketregContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLiteral(HLASMParser.LiteralContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#macode}.
 	 * @param ctx the parse tree
@@ -112,4 +124,10 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitComment(HLASMParser.CommentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link HLASMParser#comment_}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComment_(HLASMParser.Comment_Context ctx);
 }

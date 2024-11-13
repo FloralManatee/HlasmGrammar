@@ -16,30 +16,30 @@ prog
 line
     : (instruction | directive | macro) /* testing purposes */
     | label? whitespace+ (instruction | directive | macro) whitespace+ comment
+    | label? whitespace+ (instruction | directive | macro) whitespace+ comment_
     | label? whitespace+ (instruction | directive | macro) whitespace+
     | label? whitespace+ (instruction | directive | macro)
     | comment
     ;
 
 instruction
-    : opcode whitespace+ argument comma argument
-    | opcode whitespace+ argument
+    : opcode whitespace+ argument comma? argument? comma? argument?
+    | sect
     ;
 
 directive
-    : dircode whitespace+ argument comma argument
-    | dircode whitespace+ argument
-    | dircode
+    : dircode whitespace+ argument comma? argument? comma? argument?
     ;
 
 argument
-    : curloc relative?
-    | register relative?
-    | label relative?
+    : curloc (relative | bracketreg)?
+    | register (relative | bracketreg)?
+    | label (relative | bracketreg)?
+    | literal
     ;
 
 macro
-    : macode whitespace+ (string | label)
+    : macode whitespace+ (literal | label)
     | macode
     ;
 
@@ -67,6 +67,10 @@ relative
     : RELATIVE
     ;
 
+sect
+    : SECT
+    ;
+
 curloc
     : CURLOC
     ;
@@ -75,8 +79,12 @@ dircode
     : DIRCODE
     ;
 
-string
-    : QUOTE STRING QUOTE
+bracketreg
+    : BRACKETREG
+    ;
+
+literal
+    : LITERAL
     ;
 
 macode
@@ -85,20 +93,37 @@ macode
 
 comment
     : LONGCOM
-    | '*'(WHITESPACE STRING)+
-    | '*'(STRING WHITESPACE)+
     | '*'~EOL*
+    ;
+
+comment_
+    : ~EOL*
+    ;
+
+LITERAL
+    : '=X' QUOTE (STRING | INTEGER)+ QUOTE
+    | 'C' QUOTE STRING QUOTE
+    | 'XL' INTEGER QUOTE (STRING | INTEGER)+ QUOTE
+    | 'CL' INTEGER QUOTE (STRING | COMMSTRING)+ QUOTE
+    ;
+
+BRACKETREG
+    : '(' REGISTER ')'
     ;
 
 DIRCODE
     : 'USING'
-    | 'CSECT'
     | 'LTORG'
     | 'EQU'
     | 'END'
     | 'NOP'
     | 'DS'
     | 'DC'
+    ;
+
+SECT
+    : 'CSECT'
+    | 'DSECT'
     ;
 
 CURLOC
@@ -114,7 +139,8 @@ RELATIVE
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
     Technically register names can be equated to any string but grammar will not cover that case.
     */
-    : '1' | 'R1'
+    : '0' | 'R0'
+    | '1' | 'R1'
     | '2' | 'R2'
     | '3' | 'R3'
     | '4' | 'R4'
@@ -146,6 +172,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'BASR'
     | 'BC'
     | 'B'
+    | 'BE'
     | 'BCR'
     | 'BR'
     | 'BCT'
@@ -244,11 +271,11 @@ MACODE
     ;
 
 STRING
-    : [A-Z0-9@.\-():/,$#!_%`"'=]+
+    : [A-Z0-9@$#]+ /** chars allowed in labels */
     ;
 
-LABEL
-    : [A-Z][A-Z0-9@#$]+
+COMMSTRING
+    : [.\-():/!_%`"'=>]+ /** chars not allowed in labels but allowed in comments */
     ;
 
 QUOTE
@@ -272,5 +299,5 @@ COMMA
     ;
 
 WHITESPACE
-    : [ \t]
+    : [ \t]+
     ;
