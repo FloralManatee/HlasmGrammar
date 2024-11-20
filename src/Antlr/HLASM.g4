@@ -115,6 +115,7 @@ LITERAL
 
 BRACKETREG
     : '(' COMMA? REGISTER ')'
+    | '(' REGISTER COMMA REGISTER ')'
     ;
 
 BRACKETLEN
@@ -129,6 +130,9 @@ DIRCODE
     | 'NOP'
     | 'DS'
     | 'DC'
+    | 'TITLE'
+    | 'PRINT'
+    | 'DCB'
     ;
 
 SECT
@@ -279,6 +283,10 @@ MACODE
     : 'IF'
     | 'LOAD'
     | 'WTO'
+    | 'YREGS'
+    | 'OPEN'
+    | 'CLOSE'
+    | 'GET'
     ;
 
 STRING

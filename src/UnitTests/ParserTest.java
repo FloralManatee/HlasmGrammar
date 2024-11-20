@@ -105,7 +105,7 @@ public class ParserTest {
         // TestToken comma = new TestToken(",", HLASMLexer.STRING);
 
         TestToken token4 = new TestToken("3", HLASMLexer.REGISTER);
-        TestToken token5 = new TestToken("*COMM", HLASMLexer.COMMENT);
+        TestToken token5 = new TestToken("*COMM", HLASMLexer.STRING);
 
         TestToken whitespace = new TestToken(" ", HLASMLexer.WHITESPACE);
 
