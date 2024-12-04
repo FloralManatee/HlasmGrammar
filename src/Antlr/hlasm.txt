@@ -1,0 +1,14 @@
+         TITLE  'TEST'
+         YREGS
+ASMSKEL  CSECT
+         STM   R14,R12,12(R13)
+         BASR  R12,R0
+         USING *,R12
+         ST    R13,SAVEAREA+4
+         LR    R2,R13
+         LA    R13,SAVEAREA
+LOOP     EQU   *
+         MVC   RECOUT,RECIN
+         GET   FILEIN1,RECIN
+         B     LOOP
+EXIT     EQU   *

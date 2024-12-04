@@ -1,4 +1,4 @@
-grammar HLASM;
+grammar HLASM_lessold;
 
 /**
     Lexer UPPER
