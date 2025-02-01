@@ -1,4 +1,4 @@
-grammar HLASM_old;
+grammar HLASM;
 
 /**
     Lexer UPPER
@@ -10,87 +10,76 @@ options {
 }
 
 prog
-    : line+ EOF
+    : (line)+ EOF
     ;
 
 line
-    : label? whitespace*? (instruction | directive | macro)? whitespace*? comment? EOL /* ExecLine */
+    : label? WHITESPACE? (instruction | directive | macro) WHITESPACE? operands? WHITESPACE? comment? EOL
+    | comment_ EOL
     ;
 
 label
-    : STRING
-    ;
-
-whitespace
-    : WHITESPACE
+    : ALPHA (ALPHA|SYMBOL|INT)*
     ;
 
 instruction
-    : opcode whitespace*? register','(register | label | relative | curloc)
-    | opcode whitespace*? register','register
-    ;
-
-opcode
     : OPCODE
     ;
 
-register
-    : REGISTER
-    ;
-
 directive
-    : dircode whitespace? (curloc | STRING | INTEGER | relative | register | label) ','? (curloc | STRING | INTEGER | relative | register | label)?
-    ;
-
-relative
-    : RELATIVE
-    ;
-
-curloc
-    : CURLOC
-    ;
-
-dircode
     : DIRCODE
+    | SECT
     ;
 
 macro
-    : macode (STRING | INTEGER)
-    ;
-
-macode
     : MACODE
     ;
 
+operands
+    : ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS) COMMA ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS) COMMA? ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS)?
+    ;
+
 comment
-    : COMMENT
+    : ASTER? ~EOL
+    ;
+
+comment_
+    : ASTER+ ~EOL*
     ;
 
 DIRCODE
     : 'USING'
-    | 'CSECT'
     | 'LTORG'
     | 'EQU'
     | 'END'
     | 'NOP'
     | 'DS'
     | 'DC'
+    | 'TITLE'
+    | 'PRINT'
+    | 'DCB'
     ;
 
-CURLOC
+SECT
+    : 'CSECT'
+    | 'DSECT'
+    ;
+
+ASTER
     : '*'  /** aster represents current loc.
      when used it statements like EQU * it is a seperate token to the directive.
      */
     ;
 
 RELATIVE
-    : '+'INTEGER /** rative addresses can be used, e.g., +4 */
+    : '+'INT+ /** relative addresses can be used, e.g., +4 */
     ;
 
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
     Technically register names can be equated to any string but grammar will not cover that case.
     */
-    : '1' | 'R1'
+    : '0' | 'R0'
+    | '1' | 'R1'
     | '2' | 'R2'
     | '3' | 'R3'
     | '4' | 'R4'
@@ -122,6 +111,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'BASR'
     | 'BC'
     | 'B'
+    | 'BE'
     | 'BCR'
     | 'BR'
     | 'BCT'
@@ -164,6 +154,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'MH'
     | 'MVC'
     | 'MR'
+    | 'MP'
     | 'MVCIN'
     | 'MVCL'
     | 'MVI'
@@ -217,24 +208,44 @@ MACODE
     : 'IF'
     | 'LOAD'
     | 'WTO'
+    | 'YREGS'
+    | 'OPEN'
+    | 'CLOSE'
+    | 'GET'
+    | 'SAVE'
+    | 'RETURN'
     ;
 
-STRING
-    : [A-Z][A-Z0-9@]*
+PARMS
+    : 'ON'
+    | 'GEN'
+    | 'DATA'
     ;
 
-INTEGER
-    : [0-9]+
+QUOTE
+    : ["']
     ;
 
-COMMENT
-    : [*][*A-Z0-9 .\-():/,@$#!_%`"'=]*
+ALPHA
+    : [A-Z]
+    ;
+
+SYMBOL
+    : [@#&()=-]
+    ;
+
+INT
+    : [0-9]
     ;
 
 EOL
-    : [\r\n]+
+    : [\r\n]
+    ;
+
+COMMA
+    : [,]
     ;
 
 WHITESPACE
-    : [ \t] -> channel(HIDDEN)
+    : [ \t]+
     ;

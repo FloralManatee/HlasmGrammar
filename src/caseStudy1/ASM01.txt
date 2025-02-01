@@ -1,0 +1,19 @@
+         PRINT ON,GEN,DATA
+SECT     CSECT
+         SAVE (14,12)
+         BASR 12,0
+         USING *,12
+         ST 13,SAVEA+4
+         LA 13,SAVEA
+* CODE HERE *
+         LA 10,MESSAGE
+         WTO TEXT=(10),ROUTCDE=(11)
+         L 13,SAVEA+4
+         RETURN (14,12),RC=0
+         LTORG
+* VARS HERE *
+SAVEA    DS 18F
+MESSAGE  DS 0CL71
+         DC AL2(L'MESSAGE-2)
+         DC CL(L'MESSAGE-2)'Test Message 123'
+         END SECT

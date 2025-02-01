@@ -23,6 +23,12 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLine(HLASMParser.LineContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link HLASMParser#label}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLabel(HLASMParser.LabelContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link HLASMParser#instruction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -35,89 +41,17 @@ public interface HLASMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDirective(HLASMParser.DirectiveContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HLASMParser#argument}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitArgument(HLASMParser.ArgumentContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link HLASMParser#macro}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitMacro(HLASMParser.MacroContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link HLASMParser#label}.
+	 * Visit a parse tree produced by {@link HLASMParser#operands}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLabel(HLASMParser.LabelContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#whitespace}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhitespace(HLASMParser.WhitespaceContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#comma}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitComma(HLASMParser.CommaContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#opcode}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOpcode(HLASMParser.OpcodeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#register}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRegister(HLASMParser.RegisterContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#relative}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRelative(HLASMParser.RelativeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#sect}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSect(HLASMParser.SectContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#curloc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCurloc(HLASMParser.CurlocContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#dircode}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDircode(HLASMParser.DircodeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#bracketarg}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBracketarg(HLASMParser.BracketargContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLiteral(HLASMParser.LiteralContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link HLASMParser#macode}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMacode(HLASMParser.MacodeContext ctx);
+	T visitOperands(HLASMParser.OperandsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link HLASMParser#comment}.
 	 * @param ctx the parse tree

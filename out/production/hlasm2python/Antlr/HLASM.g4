@@ -10,11 +10,41 @@ options {
 }
 
 prog
-    : line+ EOF
+    : (line EOL)+ EOF
     ;
 
 line
-    : label? whitespace+? (instruction | directive | macro)? whitespace+? comment? EOL /* ExecLine */
+    : (instruction | directive | macro) /* testing purposes */
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment_
+    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+
+    | (label | register)? whitespace+ (instruction | directive | macro)
+    | comment
+    ;
+
+instruction
+    : opcode whitespace+ argument comma? argument? comma? argument?
+    | opcode whitespace+ argument comma argument argument
+    | sect
+    ;
+
+directive
+    : dircode whitespace+ argument comma? argument? comma? argument?
+    | dircode whitespace+ argument comma argument argument
+    | dircode
+    ;
+
+argument
+    : curloc (relative | bracketarg)?
+    | register (relative | bracketarg)?
+    | label (relative | bracketarg)?
+    | bracketarg
+    | literal
+    ;
+
+macro
+    : macode whitespace+ (literal | label)
+    | macode
     ;
 
 label
@@ -25,14 +55,8 @@ whitespace
     : WHITESPACE
     ;
 
-instruction
-    : opcode whitespace+? location','location
-    ;
-
-location
-    : register relative?
-    | label relative?
-    | curloc relative?
+comma
+    : COMMA
     ;
 
 opcode
@@ -43,18 +67,12 @@ register
     : REGISTER
     ;
 
-directive
-    : dircode whitespace+? argument','?argument?
-    ;
-
-argument
-    : curloc relative?
-    | register relative?
-    | label relative?
-    ;
-
 relative
     : RELATIVE
+    ;
+
+sect
+    : SECT
     ;
 
 curloc
@@ -65,8 +83,13 @@ dircode
     : DIRCODE
     ;
 
-macro
-    : macode (STRING | INTEGER)?
+bracketarg
+    : BRACKETREG
+    | BRACKETLEN
+    ;
+
+literal
+    : LITERAL
     ;
 
 macode
@@ -74,18 +97,47 @@ macode
     ;
 
 comment
-    : COMMENT
+    : LONGCOM
+    | '*'~EOL*
+    ;
+
+comment_
+    : ~EOL*
+    ;
+
+LITERAL
+    : '=X' QUOTE (STRING | INTEGER)+ QUOTE
+    | ('X' | 'H') QUOTE (STRING | INTEGER)+ QUOTE
+    | 'C' QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
+    | INTEGER? 'XL' INTEGER+ QUOTE (STRING | INTEGER)+ QUOTE
+    | INTEGER? 'CL' INTEGER+ QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
+    ;
+
+BRACKETREG
+    : '(' COMMA? REGISTER ')'
+    | '(' REGISTER COMMA REGISTER ')'
+    ;
+
+BRACKETLEN
+    : '(' INTEGER+ ')'
     ;
 
 DIRCODE
     : 'USING'
-    | 'CSECT'
     | 'LTORG'
     | 'EQU'
     | 'END'
     | 'NOP'
     | 'DS'
     | 'DC'
+    | 'TITLE'
+    | 'PRINT'
+    | 'DCB'
+    ;
+
+SECT
+    : 'CSECT'
+    | 'DSECT'
     ;
 
 CURLOC
@@ -101,7 +153,8 @@ RELATIVE
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
     Technically register names can be equated to any string but grammar will not cover that case.
     */
-    : '1' | 'R1'
+    : '0' | 'R0'
+    | '1' | 'R1'
     | '2' | 'R2'
     | '3' | 'R3'
     | '4' | 'R4'
@@ -133,6 +186,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'BASR'
     | 'BC'
     | 'B'
+    | 'BE'
     | 'BCR'
     | 'BR'
     | 'BCT'
@@ -175,6 +229,7 @@ OPCODE /** 370 instruction set from http://www.simotime.com/simoi370.htm */
     | 'MH'
     | 'MVC'
     | 'MR'
+    | 'MP'
     | 'MVCIN'
     | 'MVCL'
     | 'MVI'
@@ -228,24 +283,42 @@ MACODE
     : 'IF'
     | 'LOAD'
     | 'WTO'
+    | 'YREGS'
+    | 'OPEN'
+    | 'CLOSE'
+    | 'GET'
+    | 'SAVE'
+    | 'RETURN'
     ;
 
 STRING
-    : [A-Z][A-Z0-9@]*
+    : [A-Z0-9@$#&]+ /** chars allowed in labels */
+    ;
+
+COMMSTRING
+    : [.\-():/!_%`"'=><+?]+ /** chars not allowed in labels but allowed in comments */
+    ;
+
+QUOTE
+    : ["']
+    ;
+
+LONGCOM
+    : [*][*]+
     ;
 
 INTEGER
     : [0-9]+
     ;
 
-COMMENT
-    : [*][*A-Z0-9 .\-():/,@$#!_%`"'=]*
-    ;
-
 EOL
     : [\r\n]+
     ;
 
+COMMA
+    : [,]
+    ;
+
 WHITESPACE
-    : [ \t]
+    : [ \t]+
     ;

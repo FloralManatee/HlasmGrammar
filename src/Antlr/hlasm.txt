@@ -1,14 +1,19 @@
-         TITLE  'TEST'
-         YREGS
-ASMSKEL  CSECT
-         STM   R14,R12,12(R13)
-         BASR  R12,R0
-         USING *,R12
-         ST    R13,SAVEAREA+4
-         LR    R2,R13
-         LA    R13,SAVEAREA
-LOOP     EQU   *
-         MVC   RECOUT,RECIN
-         GET   FILEIN1,RECIN
-         B     LOOP
-EXIT     EQU   *
+         PRINT ON,GEN,DATA
+SECT     CSECT
+         SAVE (14,12)                save registers 12 - 14
+         BASR 12,0
+         USING *,12                  system uses 0,1,13,14,15
+         ST 13,SAVEA+4
+         LA 13,SAVEA
+* CODE HERE *
+         LA 10,MESSAGE
+         WTO TEXT=(10),ROUTCDE=(11)
+         L 13,SAVEA+4
+         RETURN (14,12),RC=0         restore registers
+         LTORG
+* VARS HERE *
+SAVEA    DS 18F
+MESSAGE  DS 0CL71                   WTO MESSAGE-AREA
+         DC AL2(L'MESSAGE-2)        WTO MESSAGE-AREA LGTH (HWORD)
+         DC CL(L'MESSAGE-2)'Test Message 123'
+         END SECT
