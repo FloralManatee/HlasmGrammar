@@ -1,4 +1,4 @@
-// Generated from HLASM1Parser.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ajackson/Documents/GitHub/HlasmGrammar/src/caseStudy1/HLASM1Parser.g4 by ANTLR 4.13.1
 package caseStudy1;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class HLASM1Parser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -116,6 +116,11 @@ public class HLASM1Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitProg(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitProg(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ProgContext prog() throws RecognitionException {
@@ -180,6 +185,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitLine(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitLine(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -254,6 +264,11 @@ public class HLASM1Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitLabel(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitLabel(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final LabelContext label() throws RecognitionException {
@@ -297,6 +312,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitInstruction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitInstruction(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -357,6 +377,11 @@ public class HLASM1Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitMacro(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitMacro(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final MacroContext macro() throws RecognitionException {
@@ -415,6 +440,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitOperation(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitOperation(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -483,6 +513,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitParms(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitParms(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -605,6 +640,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitMoperands(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitMoperands(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 
@@ -800,6 +840,11 @@ public class HLASM1Parser extends Parser {
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitOoperands(this);
 		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitOoperands(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final OoperandsContext ooperands() throws RecognitionException {
@@ -942,6 +987,11 @@ public class HLASM1Parser extends Parser {
 		@Override
 		public void exitRule(ParseTreeListener listener) {
 			if ( listener instanceof HLASM1ParserListener ) ((HLASM1ParserListener)listener).exitRegister(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof HLASM1ParserVisitor ) return ((HLASM1ParserVisitor<? extends T>)visitor).visitRegister(this);
+			else return visitor.visitChildren(this);
 		}
 	}
 

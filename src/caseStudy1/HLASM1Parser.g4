@@ -1,4 +1,4 @@
-parser grammar HLASM1_ParserOnly;
+parser grammar HLASM1Parser;
 
 options {
     caseInsensitive = true;
@@ -35,12 +35,12 @@ parms
     ;
 
 moperands
-    : LBRACKET register (COMMA register)* RBRACKET (COMMA MPARM EQUAL ((NUM)+ | register))*
-    | MPARM EQUAL LBRACKET register RBRACKET (COMMA MPARM EQUAL LBRACKET register (COMMA register)* RBRACKET)*
+    : LBRACKET register (COMMA register)* RBRACKET (COMMA MPARM EQUALS ((NUM)+ | register))*
+    | MPARM EQUALS LBRACKET register RBRACKET (COMMA MPARM EQUALS LBRACKET register (COMMA register)* RBRACKET)*
     ;
 
 ooperands
-    : register (COMMA (register DISPLACEMENT? | label DISPLACEMENT?))*
+    : register (COMMA(register DISPLACEMENT? | label DISPLACEMENT?))*
     | STORAGE
     | CLENGTH (STRING)?
     | DYNCLENTH (STRING)?

@@ -1,4 +1,4 @@
-// Generated from HLASM1.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ajackson/Documents/GitHub/HlasmGrammar/src/caseStudy1/HLASM1Parser.g4 by ANTLR 4.13.1
 package caseStudy1;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * This interface defines a complete listener for a parse tree produced by
  * {@link HLASM1Parser}.
  */
-public interface HLASM1Listener extends ParseTreeListener {
+public interface HLASM1ParserListener extends ParseTreeListener {
 	/**
 	 * Enter a parse tree produced by {@link HLASM1Parser#prog}.
 	 * @param ctx the parse tree

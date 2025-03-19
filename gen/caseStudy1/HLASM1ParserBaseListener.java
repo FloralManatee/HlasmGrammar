@@ -1,4 +1,4 @@
-// Generated from HLASM1.g4 by ANTLR 4.13.2
+// Generated from C:/Users/ajackson/Documents/GitHub/HlasmGrammar/src/caseStudy1/HLASM1Parser.g4 by ANTLR 4.13.1
 package caseStudy1;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -6,12 +6,12 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link HLASM1Listener},
+ * This class provides an empty implementation of {@link HLASM1ParserListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
 @SuppressWarnings("CheckReturnValue")
-public class HLASM1BaseListener implements HLASM1Listener {
+public class HLASM1ParserBaseListener implements HLASM1ParserListener {
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,54 +1,8 @@
-grammar HLASM1;
+lexer grammar HLASM1Lexer;
 
 options {
     caseInsensitive = true;
 }
-
-prog
-    : (line)+ EOF
-    ;
-
-line
-    : label? (instruction | macro | operation) EOL
-    ;
-
-label
-    : LABEL
-    ;
-
-instruction
-    : INSTRUCTION parms*
-    ;
-
-macro
-    : MACRO moperands*
-    ;
-
-operation
-    : OPCODE ooperands*
-    ;
-
-parms
-    : PARMS (','PARMS)*
-    | ASTER (','register)*
-    | LABEL
-    ;
-
-moperands
-    : LBRACKET register (',' register)* RBRACKET (',' MPARM '=' ((NUM)+ | register))*
-    | MPARM '=' LBRACKET register RBRACKET (',' MPARM '=' LBRACKET register (','register)* RBRACKET)*
-    ;
-
-ooperands
-    : register (','(register DISPLACEMENT? | label DISPLACEMENT?))*
-    | STORAGE
-    | CLENGTH (STRING)?
-    | DYNCLENTH (STRING)?
-    ;
-
-register
-    : REGISTER | EQUREGISTER
-    ;
 
 INSTRUCTION
     : 'PRINT'
@@ -158,4 +112,12 @@ ASTER
 
 APOS
     : [']
+    ;
+
+COMMA
+    : ','
+    ;
+
+EQUALS
+    : '='
     ;
