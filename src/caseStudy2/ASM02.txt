@@ -1,0 +1,44 @@
+         TITLE  'SKELETON ASSEMBLER PROGRAM'
+         PRINT  ON,NODATA,NOGEN
+         YREGS
+ASMSKEL  CSECT
+         STM   R14,R12,12(R13)
+         BASR  R12,R0
+         USING *,R12
+         ST    R13,SAVEAREA+4
+         LR    R2,R13
+         LA    R13,SAVEAREA
+         ST    R13,8(R0,R2)
+         OPEN  (FILEOUT1,(OUTPUT))
+         OPEN  (FILEIN1,(INPUT))
+         GET   FILEIN1,RECIN
+LOOP     EQU   *
+         MVC   RECOUT,RECIN
+         PUT   FILEOUT1,RECOUT
+         GET   FILEIN1,RECIN
+         B     LOOP
+EXIT     EQU   *
+         CLOSE (FILEIN1,FILEOUT1)
+         L     R13,SAVEAREA+4
+         LM    R14,R12,12(R13)
+         LA    R15,0
+         BR    14
+FILEOUT1 DCB   DSORG=PS,                                               X
+               MACRF=(PM),                                             X
+               DEVD=DA,                                                X
+               DDNAME=FILEOUT1,                                        X
+               RECFM=FB,                                               X
+               LRECL=80
+               DC    X'FFFFFFFF'
+FILEIN1  DCB   DSORG=PS,                                               X
+               MACRF=(GM),                                             X
+               DEVD=DA,                                                X
+               DDNAME=FILEIN1,                                         X
+               EODAD=EXIT,                                             X
+               RECFM=FB,                                               X
+               LRECL=80
+RECIN    DS    CL80
+RECOUT   DS    CL80
+SAVEAREA DS    18F
+         LTORG *
+         END   ASMSKEL                                                  

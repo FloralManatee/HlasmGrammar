@@ -1,0 +1,25 @@
+parser grammar HLASM1_ParserOnly;
+
+prog
+    : (line)+ EOF
+    ;
+
+line
+    : label? (instruction | macro | operation) EOL
+    ;
+
+label
+    : label
+    ;
+
+instruction
+    : opcode parms*
+    ;
+
+macro
+    : opcode moperands*
+    ;
+
+operation
+    : opcode ooperands*
+    ;

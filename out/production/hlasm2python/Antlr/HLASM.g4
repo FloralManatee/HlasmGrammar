@@ -10,116 +10,41 @@ options {
 }
 
 prog
-    : (line EOL)+ EOF
+    : (line)+ EOF
     ;
 
 line
-    : (instruction | directive | macro) /* testing purposes */
-    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment
-    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+ comment_
-    | (label | register)? whitespace+ (instruction | directive | macro) whitespace+
-    | (label | register)? whitespace+ (instruction | directive | macro)
-    | comment
-    ;
-
-instruction
-    : opcode whitespace+ argument comma? argument? comma? argument?
-    | opcode whitespace+ argument comma argument argument
-    | sect
-    ;
-
-directive
-    : dircode whitespace+ argument comma? argument? comma? argument?
-    | dircode whitespace+ argument comma argument argument
-    | dircode
-    ;
-
-argument
-    : curloc (relative | bracketarg)?
-    | register (relative | bracketarg)?
-    | label (relative | bracketarg)?
-    | bracketarg
-    | literal
-    ;
-
-macro
-    : macode whitespace+ (literal | label)
-    | macode
+    : label? WHITESPACE? (instruction | directive | macro) WHITESPACE? operands? WHITESPACE? comment? EOL
+    | comment_ EOL
     ;
 
 label
-    : STRING
+    : ALPHA (ALPHA|SYMBOL|INT)*
     ;
 
-whitespace
-    : WHITESPACE
-    ;
-
-comma
-    : COMMA
-    ;
-
-opcode
+instruction
     : OPCODE
     ;
 
-register
-    : REGISTER
-    ;
-
-relative
-    : RELATIVE
-    ;
-
-sect
-    : SECT
-    ;
-
-curloc
-    : CURLOC
-    ;
-
-dircode
+directive
     : DIRCODE
+    | SECT
     ;
 
-bracketarg
-    : BRACKETREG
-    | BRACKETLEN
-    ;
-
-literal
-    : LITERAL
-    ;
-
-macode
+macro
     : MACODE
     ;
 
+operands
+    : ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS) COMMA ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS) COMMA? ((REGISTER RELATIVE?)|((ALPHA(ALPHA|SYMBOL|INT)*) RELATIVE?)|(ASTER RELATIVE?)|RELATIVE|PARMS)?
+    ;
+
 comment
-    : LONGCOM
-    | '*'~EOL*
+    : ASTER? ~EOL
     ;
 
 comment_
-    : ~EOL*
-    ;
-
-LITERAL
-    : '=X' QUOTE (STRING | INTEGER)+ QUOTE
-    | ('X' | 'H') QUOTE (STRING | INTEGER)+ QUOTE
-    | 'C' QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
-    | INTEGER? 'XL' INTEGER+ QUOTE (STRING | INTEGER)+ QUOTE
-    | INTEGER? 'CL' INTEGER+ QUOTE (WHITESPACE | COMMA | STRING | COMMSTRING)+ QUOTE
-    ;
-
-BRACKETREG
-    : '(' COMMA? REGISTER ')'
-    | '(' REGISTER COMMA REGISTER ')'
-    ;
-
-BRACKETLEN
-    : '(' INTEGER+ ')'
+    : ASTER+ ~EOL*
     ;
 
 DIRCODE
@@ -140,14 +65,14 @@ SECT
     | 'DSECT'
     ;
 
-CURLOC
+ASTER
     : '*'  /** aster represents current loc.
      when used it statements like EQU * it is a seperate token to the directive.
      */
     ;
 
 RELATIVE
-    : '+'INTEGER /** relative addresses can be used, e.g., +4 */
+    : '+'INT+ /** relative addresses can be used, e.g., +4 */
     ;
 
 REGISTER /** registeres equated to prefix R popular stylistic programming choice,
@@ -291,28 +216,30 @@ MACODE
     | 'RETURN'
     ;
 
-STRING
-    : [A-Z0-9@$#&]+ /** chars allowed in labels */
-    ;
-
-COMMSTRING
-    : [.\-():/!_%`"'=><+?]+ /** chars not allowed in labels but allowed in comments */
+PARMS
+    : 'ON'
+    | 'GEN'
+    | 'DATA'
     ;
 
 QUOTE
     : ["']
     ;
 
-LONGCOM
-    : [*][*]+
+ALPHA
+    : [A-Z]
     ;
 
-INTEGER
-    : [0-9]+
+SYMBOL
+    : [@#&()=-]
+    ;
+
+INT
+    : [0-9]
     ;
 
 EOL
-    : [\r\n]+
+    : [\r\n]
     ;
 
 COMMA

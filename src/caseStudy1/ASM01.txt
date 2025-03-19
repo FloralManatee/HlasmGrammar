@@ -5,13 +5,11 @@ SECT     CSECT
          USING *,12
          ST 13,SAVEA+4
          LA 13,SAVEA
-* CODE HERE *
          LA 10,MESSAGE
          WTO TEXT=(10),ROUTCDE=(11)
          L 13,SAVEA+4
          RETURN (14,12),RC=0
          LTORG
-* VARS HERE *
 SAVEA    DS 18F
 MESSAGE  DS 0CL71
          DC AL2(L'MESSAGE-2)

@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
-import Antlr.HLASMLexer;
+
 import org.junit.Assert;
 import org.junit.Test;
 
