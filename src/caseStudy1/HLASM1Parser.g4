@@ -1,6 +1,7 @@
 parser grammar HLASM1Parser;
 
 options {
+    tokenVocab = HLASM1Lexer;
     caseInsensitive = true;
 }
 
@@ -42,8 +43,8 @@ moperands
 ooperands
     : register (COMMA(register DISPLACEMENT? | label DISPLACEMENT?))*
     | STORAGE
-    | CLENGTH (STRING)?
-    | DYNCLENTH (STRING)?
+    | CLENGTH STRING?
+    | DYNCLENTH STRING?
     ;
 
 register

@@ -4,3 +4,4 @@ Run grammar from input: antlr4-parse HLASM.g4 prog -gui
     ctrl + z to submit input
 
 antlr4 HLASM1Lexer.g4 HLASM1Parser.g4 -package caseStudy1
+antlr4-parse HLASM1Lexer.g4 HLASM1Parser.g4 prog -gui

@@ -96,6 +96,7 @@ WHITESPACE
 
 EOL
     : [\r\n]+
+    | [\r]+
     ;
 
 LBRACKET
@@ -121,3 +122,8 @@ COMMA
 EQUALS
     : '='
     ;
+
+PLUS
+    : '+'
+    ;
+
