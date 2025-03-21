@@ -13,10 +13,6 @@ line
     : label? (instruction | macro | operation) EOL
     ;
 
-label
-    : LABEL
-    ;
-
 instruction
     : INSTRUCTION parms*
     ;
@@ -49,4 +45,8 @@ ooperands
 
 register
     : REGISTER | EQUREGISTER
+    ;
+
+label
+    : LABEL
     ;

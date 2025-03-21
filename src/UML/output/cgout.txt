@@ -1,0 +1,1 @@
+ package app { class myASM {   attribute PRINT : String := " PRINT(parms ON , GEN , DATA) ";    attribute USING : String := " USING(parms * , (register 12)) ";          attribute END : String := " END(parms SECT) ";<EOF> } }

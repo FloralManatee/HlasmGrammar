@@ -1,0 +1,1 @@
+(file_input (stmt (compound_stmt (classdef class (name MyClass) : (block         (stmt (simple_stmts (simple_stmt (expr_stmt (testlist_star_expr (test (or_test (and_test (not_test (comparison (expr (atom_expr (atom (name x)))))))))) = (testlist_star_expr (test (or_test (and_test (not_test (comparison (expr (atom_expr (atom 5))))))))))) 5)) 5)))) x = 5)

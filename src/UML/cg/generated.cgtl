@@ -1,0 +1,49 @@
+prog::
+ (ebnf (block ( (altList (alternative (element (atom (ruleref line))))) )) (blockSuffix (ebnfSuffix +)))  (terminalDef EOF) |-->
+
+
+line::
+ _?   _instruction
+ _macro
+ _operation
+ (terminalDef EOL) |-->
+
+
+instruction::
+ (terminalDef INSTRUCTION)  _'*' |-->
+
+
+macro::
+ (terminalDef MACRO)  _'*' |-->
+
+
+operation::
+ (terminalDef OPCODE)  _'*' |-->
+
+
+parms::
+ (terminalDef PARMS)  (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (terminalDef PARMS))))) )) (blockSuffix (ebnfSuffix *))) |-->
+ (terminalDef ASTER)  (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (ruleref register))))) )) (blockSuffix (ebnfSuffix *))) |-->
+ (terminalDef LABEL) |-->
+
+
+moperands::
+ (terminalDef LBRACKET)  _register (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (ruleref register))))) )) (blockSuffix (ebnfSuffix *))) (terminalDef RBRACKET) (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (terminalDef MPARM))) (element (atom (terminalDef EQUALS))) (element (ebnf (block ( (altList (alternative (element (ebnf (block ( (altList (alternative (element (atom (terminalDef NUM))))) )) (blockSuffix (ebnfSuffix +))))) | (alternative (element (atom (ruleref register))))) )))))) )) (blockSuffix (ebnfSuffix *))) |-->
+ (terminalDef MPARM)  (terminalDef EQUALS) (terminalDef LBRACKET) _register (terminalDef RBRACKET) (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (terminalDef MPARM))) (element (atom (terminalDef EQUALS))) (element (atom (terminalDef LBRACKET))) (element (atom (ruleref register))) (element (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (atom (ruleref register))))) )) (blockSuffix (ebnfSuffix *)))) (element (atom (terminalDef RBRACKET))))) )) (blockSuffix (ebnfSuffix *))) |-->
+
+
+ooperands::
+ _register  (ebnf (block ( (altList (alternative (element (atom (terminalDef COMMA))) (element (ebnf (block ( (altList (alternative (element (atom (ruleref register))) (element (atom (terminalDef DISPLACEMENT)) (ebnfSuffix ?))) | (alternative (element (atom (ruleref label))) (element (atom (terminalDef DISPLACEMENT)) (ebnfSuffix ?)))) )))))) )) (blockSuffix (ebnfSuffix *))) |-->
+ (terminalDef STORAGE) |-->
+ (terminalDef CLENGTH)  _? |-->
+ (terminalDef DYNCLENTH)  _? |-->
+
+
+register::
+ (terminalDef REGISTER) |-->
+ (terminalDef EQUREGISTER) |-->
+
+
+label::
+ (terminalDef LABEL) |-->
+

@@ -13,3 +13,4 @@ out/*
 # Dummy for testing
 Dummy*
 Dummy.g4
+/src/pyth/

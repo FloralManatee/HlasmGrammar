@@ -1,0 +1,27 @@
+prog:: 
+_* |--> package app { class myASM { _* } }
+
+line::
+_1 _2 |--> _1
+_* |-->
+
+instruction::
+_* |--> attribute _*`first : String := " _* ";
+
+macro::
+_* |-->
+
+operation::
+_1 _2 |-->
+
+moperands::
+_* |-->
+
+ooperands::
+_* |-->
+
+register::
+_* |-->
+
+label::
+_* |-->
